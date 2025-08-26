@@ -1,4 +1,3 @@
-import os
 import cv2
 import time
 import pyautogui
@@ -9,6 +8,16 @@ from datetime import datetime as dt
 
 # 実際にスクショを実施する処理：キーボード入力があったら停止
 def capture_start(interval_time, finish_time, dir_path, x1, y1, x2, y2, on_finish=None):
+    """スクショ処理
+    
+    Args:
+        interval_time: スクショ間隔時間
+        finish_time: スクショ終了時間
+        dir_path: 保存するパス
+        x1, y1, x2, y2: スクショする画面の座標
+        on_fiish: 終了後の処理の有無
+    """
+    
     start_time = time.time()
     next_time = start_time
     print(f'スクショ間隔時間:{interval_time}')
