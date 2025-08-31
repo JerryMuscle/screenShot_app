@@ -3,7 +3,7 @@ from datetime import datetime as dt
 import tkinter as tk
 import threading
 from tkinter import messagebox, filedialog
-from service.capture import capture_start, screenshot_position
+from service.capture import capture_start
 
 save_dir = None  # 保存先ディレクトリをグローバルで保持
 
@@ -64,11 +64,15 @@ def on_start():
 def on_capture_finished():
     # GUIスレッドで安全に表示するため after() を使う
     def finish_ui():
+        global save_dir
         messagebox.showinfo("完了", "スクリーンショットが完了しました")
         capture_btn.config(state=tk.NORMAL)  # ボタンを再度有効化
         select_btn.config(state=tk.NORMAL)
 
         status_label.config(text="ステータス: 待機中") # ステータスを待機中に戻す
+        # 保存先を未選択状態に戻す
+        save_dir = None
+        dir_label.config(text="保存先: 未選択")
 
     root.after(0, finish_ui)
     
